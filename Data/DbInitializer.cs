@@ -1,4 +1,6 @@
 ﻿using Almacenes.Models;
+using Microsoft.SqlServer.Server;
+using Microsoft.NET.StringTools;
 
 namespace Almacenes.Data
 {
@@ -13,12 +15,35 @@ namespace Almacenes.Data
 
             var almacenes = new Almacen[]
             {
-                new Almacen{AlmName = "106"},
+                new Almacen{AlmName = "La 106"},
                 new Almacen{AlmName = "Rancho Grande"},
             };
 
             context.Almacenes.AddRange(almacenes);
             context.SaveChanges();
+
+            var materiales = new Material[]
+            {
+                new Material{MatName = "PVC Bushing 3/4", MatUM = "ea" },
+                new Material{MatName = "PVC Bushing 1", MatUM = "ea" },
+            };
+
+            context.Materiales.AddRange(materiales);
+            context.SaveChanges();
+
+            var movimientos = new Movimiento[]
+            {
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 1, MovQuantity = 10m, MovUnitPrice = 0.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 2, MovQuantity = 15m, MovUnitPrice = 1.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 2, MovMatId = 1, MovQuantity = 10m, MovUnitPrice = 0.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 2, MovMatId = 2, MovQuantity = 15m, MovUnitPrice = 1.15m}
+
+            };
+
+            context.Movimientos.AddRange(movimientos);
+            context.SaveChanges();
+
+
         }
     }
 }

@@ -14,7 +14,9 @@ namespace Almacenes.Data
         {
         }
 
-        public DbSet<Almacenes.Models.Almacen> Almacenes { get; set; } = default!;
+        public DbSet<Almacen> Almacenes { get; set; } = default!;
+        public DbSet<Material> Materiales { get; set; } = default!;
+        public DbSet<Movimiento> Movimientos { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

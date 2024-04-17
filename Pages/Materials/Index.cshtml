@@ -1,0 +1,61 @@
+﻿@page
+@model Materials.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Material[0].MatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material[0].MatUM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material[0].Existencia)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Material) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatUM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Existencia)
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.MaterialId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.MaterialId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.MaterialId">Delete</a>
+                </td>
+            </tr>
+@*             foreach(var bod in item.Movimientos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem =>bod.Almacen.AlmName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => bod.MovQuantity)
+                    </td>
+
+                </tr>
+            }
+ *@        }
+    </tbody>
+</table>

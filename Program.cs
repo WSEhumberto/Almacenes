@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Almacenes.Data;
+using Almacenes.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<AlmacenesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AlmacenesContext") ?? throw new InvalidOperationException("Connection string 'AlmacenesContext' not found.")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddTransient<IMaterialBalance, MaterialBalance>();
 
 var app = builder.Build();
 
