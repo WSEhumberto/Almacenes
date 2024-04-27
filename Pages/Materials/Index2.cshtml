@@ -1,0 +1,61 @@
+﻿@page
+@model Materials.Index2Model
+
+@{
+    ViewData["Title"] = "Index1";
+    // var nestedGroup = (dynamic)ViewData["NestedGroup"];
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th align="left">
+                @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].MatId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].AlmId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].MatBalance)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+            @foreach(var outerGroup in Model.MaterialMovimientosVMs.GroupBy(g => g.MatName))
+            {
+                <tr >
+                    <td align="left">
+                        @Html.DisplayFor(modelItem => outerGroup.Key)
+                        <span>....Total Material is: @Model.MaterialMovimientosVMs.Where(w => w.MatName == outerGroup.Key).Select(outerGroup => outerGroup.MatBalance).FirstOrDefault()</span>
+
+                    </td>
+                </tr>
+
+                foreach(var innerGroup in outerGroup)
+                {
+                    <tr>
+                        <td align="right">
+                            @Html.DisplayFor(modelItem => innerGroup.AlmName)
+                        </td>
+
+                        <td align="right">
+                            @Html.DisplayFor(modelItem => innerGroup.AlmQ)
+                        </td>
+                        <td align="left">
+                            @Html.DisplayFor(modelItem => innerGroup.MatUM)
+                        </td>
+
+                    </tr>
+                }
+
+            }
+
+    </tbody>
+</table>

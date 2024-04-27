@@ -5,20 +5,15 @@
 }
 
 <div class="text-center">
-    <img src="~/images/FinalLogo.jpg" class="img-thumbnail" style="width:150px;height:200px" />
-    <br />
-    <br />
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary align-middle" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Launch demo modal
     </button>
 </div>
 
-
-
 <br />
 
-<div class="card-columns mt-3 row row-cols-md-4">
+<div class="card-columns mt-3 row row-cols-sm-4">
     <div class="card">
         <img src="~/images/FinalLogo.jpg" class="card-img-top" alt="..." style="width:150px;height:200px">
         <div class="card-body">
@@ -27,11 +22,19 @@
             <p class="card-text"><small class="text-muted">...en caso de nuevas bodegas</small></p>
         </div>
     </div>
-    <div class="card">
-        <img src="~/images/FinalLogo.jpg" class="card-img-top" style="width:150px;height:200px" alt="...">
+    <div class="card bg-primary text-white text-center p-3">
+        <blockquote class="blockquote mb-0">
+            <h5 class="card-title">Materiales</h5>
+            <p>Utilicen esta opcion para ver el catalogo de materiales y sus existencias</p>
+        </blockquote>
+        <img src="~/images/FinalLogo.jpg" class="card-img-bottom" style="width:150px;height:200px" alt="...">
+
+    </div>
+    <div class="card text-center">
         <div class="card-body">
-            <h5 class="card-title">Entradas de Materiales</h5>
-            <p class="card-text">Esta Opcion nos permite dar de alta a los materiales, ademas de la bodega y su localizacion dentro de ella</p>
+            <h5 class="card-title">Movimientos</h5>
+            <p class="card-text">Listado de Entradas y Salidas, ordenadas por Material, Bodega y Transaccion</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
     <div class="card p-3">
@@ -45,24 +48,11 @@
             </footer>
         </blockquote>
     </div>
-    <div class="card bg-primary text-white text-center p-3">
-        <blockquote class="blockquote mb-0">
-            <h5 class="card-title">Lista de Materiales</h5>
-            <p>Utilicen esta opcion para ver la existencia de materiales en sus diferentes bodegas</p>
-            <footer class="blockquote-footer text-white">
-                <small>
-                    Heriberto en su dicho...  <cite title="Fierro!">Fierro!</cite>
-                </small>
-            </footer>
-        </blockquote>
-        <img src="~/images/FinalLogo.jpg" class="card-img-bottom" style="width:150px;height:200px" alt="...">
-
-    </div>
-    <div class="card text-center">
+    <div class="card">
+        <img src="~/images/FinalLogo.jpg" class="card-img-top" style="width:150px;height:200px" alt="...">
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has a regular title and short paragraphy of text below it.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <h5 class="card-title">Entradas de Materiales</h5>
+            <p class="card-text">Esta Opcion nos permite dar de alta a los materiales, ademas de la bodega y su localizacion dentro de ella</p>
         </div>
     </div>
     <div class="card">
@@ -75,9 +65,9 @@
     <div class="card p-3 text-right">
         <blockquote class="blockquote mb-0">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">
-                <small class="text-muted">
-                    Someone famous in <cite title="Source Title">Source Title</cite>
+            <footer class="blockquote-footer text-black">
+                <small>
+                    Heriberto en su dicho...  <cite title="Fierro!">Fierro!</cite>
                 </small>
             </footer>
         </blockquote>
@@ -88,6 +78,15 @@
             <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
+        <blockquote class="blockquote mb-0 card-body">
+            <p>"...Sin necesidad"</p>
+            <footer class="blockquote-footer">
+                <small class="text-muted">
+                    David Garcia en  <cite title="Source Title">Dia a Dia...</cite>
+                </small>
+            </footer>
+        </blockquote>
+
     </div>
 </div>
 

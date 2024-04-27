@@ -25,7 +25,7 @@ namespace Almacenes.Data
             var materiales = new Material[]
             {
                 new Material{MatName = "PVC Bushing 3/4", MatUM = "ea" },
-                new Material{MatName = "PVC Bushing 1", MatUM = "ea" },
+                new Material{MatName = "PVC Bushing 1", MatUM = "ea" }
             };
 
             context.Materiales.AddRange(materiales);
@@ -33,11 +33,14 @@ namespace Almacenes.Data
 
             var movimientos = new Movimiento[]
             {
-                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 1, MovQuantity = 10m, MovUnitPrice = 0.15m},
-                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 2, MovQuantity = 15m, MovUnitPrice = 1.15m},
-                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 2, MovMatId = 1, MovQuantity = 10m, MovUnitPrice = 0.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 1, MovQuantity = 1m, MovUnitPrice = 0.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 2, MovQuantity = 3m, MovUnitPrice = 1.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 2, MovMatId = 1, MovQuantity = 5m, MovUnitPrice = 0.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 2, MovMatId = 2, MovQuantity = 7m, MovUnitPrice = 1.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 1, MovQuantity = 9m, MovUnitPrice = 0.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 1, MovMatId = 2, MovQuantity = 11m, MovUnitPrice = 1.15m},
+                new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 2, MovMatId = 1, MovQuantity = 13m, MovUnitPrice = 0.15m},
                 new Movimiento{MovDate = DateOnly.MaxValue, MovAlmId = 2, MovMatId = 2, MovQuantity = 15m, MovUnitPrice = 1.15m}
-
             };
 
             context.Movimientos.AddRange(movimientos);

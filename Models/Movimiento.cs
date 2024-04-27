@@ -9,11 +9,11 @@ namespace Almacenes.Models
         public DateOnly MovDate { get; set; }
         [ForeignKey("Almacen")]
         public int MovAlmId { get; set; }
-        public Almacen Almacen { get; set; }
+        public Almacen? Almacen { get; set; }
 
         [ForeignKey("Material")]
         public int MovMatId { get; set; }
-        public Material Material { get; set; }
+        public Material? Material { get; set; }
 
         public decimal MovQuantity { get; set; }
 
