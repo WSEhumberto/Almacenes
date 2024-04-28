@@ -71,6 +71,12 @@ namespace Almacenes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovimientoId"));
 
+                    b.Property<int>("Cajas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Estantes")
+                        .HasColumnType("int");
+
                     b.Property<int>("MovAlmId")
                         .HasColumnType("int");
 
@@ -85,6 +91,9 @@ namespace Almacenes.Migrations
 
                     b.Property<decimal>("MovUnitPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Niveles")
+                        .HasColumnType("int");
 
                     b.HasKey("MovimientoId");
 

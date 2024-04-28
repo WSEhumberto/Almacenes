@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Almacenes.Migrations
 {
     /// <inheritdoc />
-    public partial class MaterialEntityIssues : Migration
+    public partial class InventoryFunctionality : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,7 +49,10 @@ namespace Almacenes.Migrations
                     MovAlmId = table.Column<int>(type: "int", nullable: false),
                     MovMatId = table.Column<int>(type: "int", nullable: false),
                     MovQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MovUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    MovUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Estantes = table.Column<int>(type: "int", nullable: false),
+                    Niveles = table.Column<int>(type: "int", nullable: false),
+                    Cajas = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

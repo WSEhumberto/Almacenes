@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Almacenes.Migrations
 {
     [DbContext(typeof(AlmacenesContext))]
-    [Migration("20240417002639_MaterialEntityIssues")]
-    partial class MaterialEntityIssues
+    [Migration("20240428033841_InventoryFunctionality")]
+    partial class InventoryFunctionality
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,6 +74,12 @@ namespace Almacenes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovimientoId"));
 
+                    b.Property<int>("Cajas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Estantes")
+                        .HasColumnType("int");
+
                     b.Property<int>("MovAlmId")
                         .HasColumnType("int");
 
@@ -88,6 +94,9 @@ namespace Almacenes.Migrations
 
                     b.Property<decimal>("MovUnitPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Niveles")
+                        .HasColumnType("int");
 
                     b.HasKey("MovimientoId");
 

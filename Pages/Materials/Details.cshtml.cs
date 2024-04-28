@@ -21,21 +21,24 @@ namespace Almacenes.Pages.Materials
 
         public Material Material { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public List<Movimiento> Movimientos { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int? id, int? almId)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var material = await _context.Materiales.FirstOrDefaultAsync(m => m.MaterialId == id);
-            if (material == null)
+
+            var movimientos = await _context.Movimientos.Where(w => w.MovMatId == id && w.MovAlmId == almId).Include(i => i.Almacen).Include(m => m.Material).ToListAsync();
+            if (movimientos == null)
             {
                 return NotFound();
             }
             else
             {
-                Material = material;
+                Movimientos = movimientos; 
             }
             return Page();
         }

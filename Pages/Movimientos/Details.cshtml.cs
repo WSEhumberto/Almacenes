@@ -19,7 +19,7 @@ namespace Almacenes.Pages.Movimientos
             _context = context;
         }
 
-        public Movimiento Movimiento { get; set; } = default!;
+        public List<Movimiento> Movimientos { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace Almacenes.Pages.Movimientos
                 return NotFound();
             }
 
-            var movimiento = await _context.Movimientos.FirstOrDefaultAsync(m => m.MovimientoId == id);
-            if (movimiento == null)
+            var movimientos = await _context.Movimientos.Where(w => w.MovMatId == id).Include(i => i.Almacen).ToListAsync();
+            if (movimientos == null)
             {
                 return NotFound();
             }
             else
             {
-                Movimiento = movimiento;
+                Movimientos = movimientos;
             }
             return Page();
         }
