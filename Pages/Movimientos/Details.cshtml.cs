@@ -28,7 +28,7 @@ namespace Almacenes.Pages.Movimientos
                 return NotFound();
             }
 
-            var movimientos = await _context.Movimientos.Where(w => w.MovMatId == id).Include(i => i.Almacen).ToListAsync();
+            var movimientos = await _context.Movimientos.Where(w => w.MovimientoId == id).Include(i => i.Almacen).ToListAsync();
             if (movimientos == null)
             {
                 return NotFound();

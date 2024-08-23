@@ -9,7 +9,7 @@ namespace Almacenes.Data
 {
     public class AlmacenesContext : DbContext
     {
-        public AlmacenesContext (DbContextOptions<AlmacenesContext> options)
+        public AlmacenesContext(DbContextOptions<AlmacenesContext> options)
             : base(options)
         {
         }

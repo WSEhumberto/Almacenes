@@ -26,10 +26,24 @@ namespace Almacenes.Pages.Materials
         }
 
         public IList<Material> Material { get;set; } = default!;
-        public IList<Movimiento> Movimientos { get;set; } = default!;
+        [BindProperty (SupportsGet = true)]
+        public IList<Movimiento> Movimientos { get;set; } = new List<Movimiento> ();
         public IList<MaterialMovimientosVM> MaterialMovimientosVMs { get;set; } = default!;
         public async Task OnGetAsync()
         {
+            var Movimientos =
+                (from mov in _context.Movimientos.Include(i => i.Almacen).Include(j => j.Material)
+                select new Movimiento
+                {
+                    MovimientoId = mov.MovimientoId,
+                    MovAlmId = mov.MovAlmId,
+                    MovDate = mov.MovDate,
+                    MovMatId = mov.MovMatId,
+                    MovQuantity = 1, /*_balance.Balance(_context, mov.MovMatId),*/
+                    MovUnitPrice = mov.MovUnitPrice
+                });
+
+            await Movimientos.ToListAsync();
             //var movimientos =
             //    from mov in _context.Movimientos
             //    group mov by mov.MovAlmId into newGroup1
@@ -95,19 +109,8 @@ namespace Almacenes.Pages.Materials
             //Movimientos = await movimientos.ToListAsync();
 
             /*************** Try Three **************/
-            var movimientos =
-                from mov in _context.Movimientos.Include(i => i.Almacen).Include(j => j.Material)
-                select new Movimiento
-                { 
-                    MovimientoId = mov.MovimientoId,
-                    MovAlmId = mov.MovAlmId,
-                    MovDate =  mov.MovDate,
-                    MovMatId = mov.MovMatId,
-                    MovQuantity = _balance.Balance(mov.MovMatId, mov.MovAlmId),
-                    MovUnitPrice = mov.MovUnitPrice
-                };
 
-            Movimientos = await movimientos.ToListAsync();
+            //Movimientos = await movimientos.ToListAsync();
 
 
 

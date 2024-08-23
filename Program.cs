@@ -9,8 +9,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AlmacenesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AlmacenesContext") ?? throw new InvalidOperationException("Connection string 'AlmacenesContext' not found.")));
 
+builder.Services.AddDbContext<AlmacenesContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING") ?? throw new InvalidOperationException("Connection string '\"AZURE_SQL_CONNECTIONSTRING\"' not found.")));
+
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddTransient<IMaterialBalance, MaterialBalance>();
+//builder.Services.AddScoped<AlmacenesContext, AlmacenesContext>();
 
 var app = builder.Build();
 

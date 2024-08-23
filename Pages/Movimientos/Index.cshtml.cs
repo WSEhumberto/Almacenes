@@ -25,7 +25,9 @@ namespace Almacenes.Pages.Movimientos
         {
             Movimiento = await _context.Movimientos
                 .Include(m => m.Almacen)
-                .Include(m => m.Material).ToListAsync();
+                .Include(m => m.Material)
+                .OrderBy(m => m.MovMatId).ThenBy(m => m.MovAlmId)
+                .ToListAsync();
         }
     }
 }

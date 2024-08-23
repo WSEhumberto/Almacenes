@@ -40,9 +40,12 @@ namespace Almacenes.Pages.Materials
                                 MaterialId = r.MaterialId,
                                 MatName = r.MatName,
                                 MatUM = r.MatUM,
-                                Existencia = _balance.Balance(r.MaterialId),
-                                Movimientos = r.Movimientos
+                                Existencia = _balance.Balance(_context, r.MaterialId)
+                                //Movimientos = r.Movimientos
                             };
+
+            Material = await materials.ToListAsync();
+
 
             //Material = await materials.ToListAsync(IList<MaterialMovimientosVM> materialMovimientosVM);
 
@@ -71,7 +74,6 @@ namespace Almacenes.Pages.Materials
 
             //};
 
-            Material = await materials.ToListAsync();
             //Material = await MaterialMovimientosVM.;
             //MaterialMovimientosVMs = await materials.ToListAsync();
 

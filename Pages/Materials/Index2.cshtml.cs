@@ -17,21 +17,74 @@ namespace Almacenes.Pages.Materials
     public class Index2Model : PageModel
     {
         private readonly AlmacenesContext _context;
-        private readonly IMaterialBalance _balance;
+        //private readonly IMaterialBalance _balance;
 
-        public Index2Model(AlmacenesContext context, IMaterialBalance balance)
+        public Index2Model(AlmacenesContext context/*, IMaterialBalance balance*/)
         {
             _context = context;
-            _balance = balance;
+            //_balance = balance;
         }
 
-        public IList<Material> Material { get;set; } = default!;
-        public IList<Movimiento> Movimientos { get;set; } = default!;
-        public IList<MaterialMovimientosVM> MaterialMovimientosVMs { get;set; } = default!;
-
+        [BindProperty(SupportsGet = true)]
+        public List<Material> Material { get;set; } = default!;
+        [BindProperty(SupportsGet = true)]
+        public List<Movimiento> Movimientos { get;set; } = default!;
+        [BindProperty(SupportsGet = true)]
+        public List<MaterialMovimientosVM> MaterialMovimientosVMs { get;set; } = default!;
+        [BindProperty(SupportsGet = true)]
         public IEnumerable<IGrouping<int, Movimiento>> NestedGroups { get; set; } = default!;
         public async Task OnGetAsync()
         {
+
+
+            /*************** Try Three ****************/
+            
+            decimal Balance1(int i)
+            {
+                //var balance = 0m;
+
+                var balance =
+                    from b in _context.Movimientos
+                    where b.MovMatId == i
+                    select b;
+
+                decimal c = 0m;
+
+                foreach (var mov in balance)
+                {
+                    c += mov.MovQuantity;
+                }
+                return c;
+            }
+
+            var balance =
+                from b in _context.Movimientos
+                //where b.MovMatId == i
+                select b;
+
+
+
+
+            MaterialMovimientosVMs =
+                await (from r in _context.Movimientos.Include(i => i.Material).Include(j => j.Almacen)
+                       let blnce = _context.Movimientos.Where(w => w.MovMatId == r.MovMatId && w.MovAlmId == r.MovAlmId).Sum(r => r.MovQuantity)
+                       let Almblnce = _context.Movimientos.Where(w => w.MovMatId == r.MovMatId).Sum(r => r.MovQuantity)
+                       //join s in _context.Movimientos.Include(i => i.Almacen) on r.MaterialId equals s.MovMatId
+                       //select g;
+                       select new MaterialMovimientosVM
+                       {
+                           MatBalance = blnce,
+                           //MatBalance = 0m,
+                           //MatBalance = Balance1(r.MovMatId), // (An expresion tree may not contain a referencto to a local function)
+                           //MatBalance = _context.Movimientos.Where(predicate: w => w.MovMatId == r.MovMatId).Sum(),
+                           MatId = r.MovMatId,
+                           AlmId = r.MovAlmId,
+                           MatName = r.Material.MatName,
+                           MatUM = r.Material.MatUM,
+                           AlmName = r.Almacen.AlmName,
+                           AlmQ = Almblnce
+                       }).Distinct().ToListAsync();
+
             //var nestedGroupsQuery =
             //    _context.Movimientos.Include(i => i.Material).Include(v => v.Almacen)
             //    .GroupBy(mov => mov.MovMatId)
@@ -141,24 +194,24 @@ namespace Almacenes.Pages.Materials
 
             //MaterialMovimientosVMs = await materials.ToListAsync();
 
-            
-            /*************** Try Two ****************/
-            var materials =
-                from r in _context.Movimientos.Include(i => i.Material).Include(j => j.Almacen)
-                //join s in _context.Movimientos.Include(i => i.Almacen) on r.MaterialId equals s.MovMatId
-                //select g;
-                select new MaterialMovimientosVM
-                {
-                    MatBalance = _balance.Balance(r.MovMatId),
-                    MatId = r.MovMatId,
-                    AlmId = r.MovAlmId,
-                    MatName = r.Material.MatName,
-                    MatUM = r.Material.MatUM,
-                    AlmName = r.Almacen.AlmName,
-                    AlmQ = _balance.Balance(r.MovMatId, r.MovAlmId),
-                };
 
-            MaterialMovimientosVMs = await materials.Distinct().ToListAsync();
+            ///*************** Try Two ****************/
+            //MaterialMovimientosVMs =
+            //    await (from r in _context.Movimientos.Include(i => i.Material).Include(j => j.Almacen)
+            //    //join s in _context.Movimientos.Include(i => i.Almacen) on r.MaterialId equals s.MovMatId
+            //    //select g;
+            //    select new MaterialMovimientosVM
+            //    {
+            //        MatBalance = _balance.Balance(_context, r.MovMatId),
+            //        MatId = r.MovMatId,
+            //        AlmId = r.MovAlmId,
+            //        MatName = r.Material.MatName,
+            //        MatUM = r.Material.MatUM,
+            //        AlmName = r.Almacen.AlmName,
+            //        AlmQ = _balance.Balance(_context, r.MovMatId, r.MovAlmId)
+            //    }).Distinct().ToListAsync();
+
+            //MaterialMovimientosVMs = await materials.Distinct().ToListAsync();
 
 
 

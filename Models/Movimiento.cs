@@ -22,6 +22,8 @@ namespace Almacenes.Models
 
         public EstantesEnum Estantes { get; set; }
 
+        public MovTypeEnum MovType { get; set; }
+
         public enum EstantesEnum
         {
             [Display(Name = "Piso")]
@@ -100,13 +102,12 @@ namespace Almacenes.Models
             B11 = 11,
             [Display(Name = "Caja 12")]
             B12 = 12,
-
-
         }
 
-
-
-
+        public enum MovTypeEnum
+        {
+            Entrada = 1,
+            Salida = 2
+        }
     }
-    
 }

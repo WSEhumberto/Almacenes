@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Almacenes.Migrations
 {
     [DbContext(typeof(AlmacenesContext))]
-    [Migration("20240428033841_InventoryFunctionality")]
-    partial class InventoryFunctionality
+    [Migration("20240731211343_AddedAMovTypeToMovimientoEntity")]
+    partial class AddedAMovTypeToMovimientoEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,9 @@ namespace Almacenes.Migrations
 
                     b.Property<decimal>("MovQuantity")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("MovType")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("MovUnitPrice")
                         .HasColumnType("decimal(18,2)");

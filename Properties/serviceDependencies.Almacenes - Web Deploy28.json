@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "ignored": "True",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:\"AZURE_SQL_CONNECTIONSTRING\"",
+      "dynamicId": null
+    },
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/Almacenes/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsAZURE_SQL_CONNECTIONSTR_22CF30F1E5",
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/almacenesdbserver/databases/Almacenes_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:AZURE_SQL_CONNECTIONSTRING"
+    }
+  }
+}

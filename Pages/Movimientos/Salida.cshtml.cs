@@ -50,7 +50,7 @@ namespace Almacenes.Pages.Movimientos
 
             ViewData["Availability1"] = ViewData["Availability"];
 
-            Availability = _balance.Balance(int.Parse(SelectedMaterial), int.Parse(SelectedAlmacen));
+            Availability = _balance.Balance(_context, int.Parse(SelectedMaterial), int.Parse(SelectedAlmacen));
 
             
 
@@ -79,7 +79,7 @@ namespace Almacenes.Pages.Movimientos
 
 
             var Availability =
-                _balance.Balance(Movimiento.MovMatId, Movimiento.MovAlmId);
+                _balance.Balance(_context, Movimiento.MovMatId, Movimiento.MovAlmId);
 
             var mov =
                 _context.Movimientos

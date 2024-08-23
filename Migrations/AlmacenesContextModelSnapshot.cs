@@ -89,6 +89,9 @@ namespace Almacenes.Migrations
                     b.Property<decimal>("MovQuantity")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("MovType")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("MovUnitPrice")
                         .HasColumnType("decimal(18,2)");
 

@@ -4,6 +4,12 @@
     ViewData["Title"] = "Home page";
 }
 
+<style>
+    .card {
+        margin-right: 10px; margin-bottom: 10px;
+    }
+</style>
+
 <div class="text-center">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary align-middle" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -12,84 +18,95 @@
 </div>
 
 <br />
+<div@*  class="card-columns" *@>
+    <div class="row @* row-cols-md-6 *@" data-masonry='{" percentPosition": true }'>
+        <div class="card">
+            <img src="~/images/FinalLogo.jpg" class="card-img-top" alt="..." style="width:150px;height:200px">
+            <div class="card-body">
+                <h5 class="card-title">Bodegas</h5>
+                <p class="card-text">Ver, Editar y Agregar Bodegas</p>
+                <p class="card-text"><small class="text-muted">...en caso de nuevas bodegas</small></p>
+            </div>
+            <a class="stretched-link" asp-area="" asp-page="/Almacenes/Index"></a>
+        </div>
+        <div class="card bg-primary text-white text-center p-3">
+            <blockquote class="blockquote mb-0">
+                <h5 class="card-title">Materiales</h5>
+                <p>Utilicen esta opcion para ver el catalogo de materiales y sus existencias</p>
 
-<div class="card-columns mt-3 row row-cols-sm-4">
-    <div class="card">
-        <img src="~/images/FinalLogo.jpg" class="card-img-top" alt="..." style="width:150px;height:200px">
-        <div class="card-body">
-            <h5 class="card-title">Bodegas</h5>
-            <p class="card-text">Ver, Editar y Agregar Bodegas</p>
-            <p class="card-text"><small class="text-muted">...en caso de nuevas bodegas</small></p>
-        </div>
-    </div>
-    <div class="card bg-primary text-white text-center p-3">
-        <blockquote class="blockquote mb-0">
-            <h5 class="card-title">Materiales</h5>
-            <p>Utilicen esta opcion para ver el catalogo de materiales y sus existencias</p>
-        </blockquote>
-        <img src="~/images/FinalLogo.jpg" class="card-img-bottom" style="width:150px;height:200px" alt="...">
+            </blockquote>
+            <img src="~/images/FinalLogo.jpg" class="card-img-bottom" style="width:150px;height:200px" alt="...">
+            <a class="stretched-link" asp-area="" asp-page="/Materials/Index1"></a>
 
-    </div>
-    <div class="card text-center">
-        <div class="card-body">
-            <h5 class="card-title">Movimientos</h5>
-            <p class="card-text">Listado de Entradas y Salidas, ordenadas por Material, Bodega y Transaccion</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>
-    <div class="card p-3">
-        <img src="~/images/FinalLogo.jpg" class="card-img-bottom" style="width:150px;height:200px" alt="...">
-        <blockquote class="blockquote mb-0 card-body">
-            <p>"...Sin necesidad"</p>
-            <footer class="blockquote-footer">
-                <small class="text-muted">
-                    David Garcia en  <cite title="Source Title">Dia a Dia...</cite>
-                </small>
-            </footer>
-        </blockquote>
-    </div>
-    <div class="card">
-        <img src="~/images/FinalLogo.jpg" class="card-img-top" style="width:150px;height:200px" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Entradas de Materiales</h5>
-            <p class="card-text">Esta Opcion nos permite dar de alta a los materiales, ademas de la bodega y su localizacion dentro de ella</p>
-        </div>
-    </div>
-    <div class="card">
-        <img src="~/images/FinalLogo.jpg" class="card-img-top" alt="..." style="width:150px;height:200px">
-        <div class="card-body">
-            <h5 class="card-title">Salidas de Materiales</h5>
-            <p class="card-text">Esta Opcion nos permite dar salida a materiales de las bodegas y su asignacion a la obra que los ocupa</p>
-        </div>
-    </div>
-    <div class="card p-3 text-right">
-        <blockquote class="blockquote mb-0">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer text-black">
-                <small>
-                    Heriberto en su dicho...  <cite title="Fierro!">Fierro!</cite>
-                </small>
-            </footer>
-        </blockquote>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-        <blockquote class="blockquote mb-0 card-body">
-            <p>"...Sin necesidad"</p>
-            <footer class="blockquote-footer">
-                <small class="text-muted">
-                    David Garcia en  <cite title="Source Title">Dia a Dia...</cite>
-                </small>
-            </footer>
-        </blockquote>
 
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Movimientos</h5>
+                <p class="card-text">Listado de Entradas y Salidas, ordenadas por Material, Bodega y Transaccion</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <a class="stretched-link" asp-area="" asp-page="/Movimientos/Index"></a>
+
+            </div>
+        </div>
+        <div class="card ">
+            <img src="~/images/FinalLogo.jpg" class="card-img-top" style="width:150px;height:200px" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Entradas de Materiales</h5>
+                <p class="card-text">Esta Opcion nos permite dar de alta a los materiales, ademas de la bodega y su localizacion dentro de ella</p>
+                <a class="stretched-link" asp-area="" asp-page="/Movimientos/Entrada"></a>
+
+            </div>
+        </div>
+        <div class="card">
+            <img src="~/images/FinalLogo.jpg" class="card-img-top" alt="..." style="width:150px;height:200px">
+            <div class="card-body">
+                <h5 class="card-title">Salidas de Materiales</h5>
+                <p class="card-text">Esta Opcion nos permite dar salida a materiales de las bodegas y su asignacion a la obra que los ocupa</p>
+                <a class="stretched-link" asp-area="" asp-page="/Movimientos/Salida"></a>
+
+            </div>
+        </div>
+        <div class="card p-3">
+            <img src="~/images/FinalLogo.jpg" class="card-img-bottom" style="width:150px;height:200px" alt="...">
+            <blockquote class="blockquote mb-0 card-body">
+                <p>"...Sin necesidad"</p>
+                <footer class="blockquote-footer">
+                    <small class="text-muted">
+                        David Garcia en  <cite title="Source Title">Dia a Dia...</cite>
+                    </small>
+                </footer>
+            </blockquote>
+        </div>
+
+        <div class="card bg-info text-black p-3 text-right">
+            <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer text-black">
+                    <small>
+                        Heriberto en su dicho...  <cite title="Fierro!">Fierro!</cite>
+                    </small>
+                </footer>
+            </blockquote>
+        </div>
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+                <p class="card-text"><small class=" text-white">Last updated 3 mins ago</small></p>
+            </div>
+            <blockquote class="blockquote mb-0 card-body text-white">
+                <p>"...Sin necesidad"</p>
+                <footer class="blockquote-footer text-white">
+                    <small class="text-white">
+                        David Garcia en  <cite title="Source Title">Dia a Dia...</cite>
+                    </small>
+                </footer>
+            </blockquote>
+
+        </div>
     </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -108,6 +125,10 @@
         </div>
     </div>
 </div>
+
+<script 
+    src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async>
+</script>
 
 
 

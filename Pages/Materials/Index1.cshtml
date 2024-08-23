@@ -13,11 +13,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimientos[0].MovAlmId)
-            </th>
+            
             <th align="right">
                 @Html.DisplayNameFor(model => model.Movimientos[0].MovMatId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovAlmId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movimientos[0].MovQuantity)
@@ -27,15 +28,16 @@
     </thead>
     <tbody>
 
-            @foreach(var outerGroup in Model.Movimientos.GroupBy(mov => mov.MovMatId))
+            @* @foreach(var outerGroup in Model.Movimientos.GroupBy(mov => mov.MovMatId))
             {
                 <tr>
                     <td align="center">
                         @Html.DisplayFor(modelItem => outerGroup.Key)
                     </td>
+                                       
                 </tr>
 
-                foreach(var innerGroup in outerGroup.GroupBy(mov => mov.MovAlmId))
+                foreach(var innerGroup in outerGroup.GroupBy(mov => mov.MovAlmId).ToList())
                 {
                     <tr>
                         <td align="right">
@@ -54,7 +56,21 @@
                     }
 
                 }
-            }
-        
+            } *@
+
+        @foreach (var innerGroupElement in Model.Movimientos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => innerGroupElement.MovMatId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => innerGroupElement.MovAlmId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => innerGroupElement.MovQuantity)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

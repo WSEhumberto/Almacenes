@@ -2,7 +2,7 @@
 @model Materials.Index2Model
 
 @{
-    ViewData["Title"] = "Index1";
+    ViewData["Title"] = "Index2";
     // var nestedGroup = (dynamic)ViewData["NestedGroup"];
 }
 
@@ -16,38 +16,37 @@
         <tr>
             @* <th></th> *@
             <th align="left">
-                @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].MatId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].AlmId)
+                @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].AlmName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].MatBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialMovimientosVMs[0].MatUM)
             </th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
 
-            @foreach(var outerGroup in Model.MaterialMovimientosVMs.GroupBy(g => g.MatName))
+            @foreach(var outerGroup in Model.MaterialMovimientosVMs.GroupBy(g => g.MatName).ToList())
             {
                 <tr >
                     <td align="left" class="fw-bold">
                         @Html.DisplayFor(modelItem => outerGroup.Key)
-                        <span>....Total Material is: @Model.MaterialMovimientosVMs.Where(w => w.MatName == outerGroup.Key).Select(outerGroup => outerGroup.MatBalance).FirstOrDefault()</span>
+                        <span>....Total Material is: @Model.MaterialMovimientosVMs.Where(w => w.MatName == outerGroup.Key).Select(outerGroup => outerGroup.AlmQ).FirstOrDefault()</span>
 
                     </td>
                 </tr>
 
-                foreach(var innerGroup in outerGroup)
+                foreach(var innerGroup in outerGroup.ToList())
                 {
                     <tr>
                         <td align="left">
                             @Html.DisplayFor(modelItem => innerGroup.AlmName)
                         </td>
-
                         <td align="left">
-                            @Html.DisplayFor(modelItem => innerGroup.AlmQ)
+                            @Html.DisplayFor(modelItem => innerGroup.MatBalance)
                         </td>
                         <td align="left">
                             @Html.DisplayFor(modelItem => innerGroup.MatUM)

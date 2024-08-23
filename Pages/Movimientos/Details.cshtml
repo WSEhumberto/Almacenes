@@ -12,7 +12,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Movimientos[0].MovimientoId)
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movimientos[0].Almacen.AlmName)
@@ -26,7 +29,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Movimientos[0].Cajas)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovUnitPrice)
+            </th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -34,8 +43,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MovimientoId)
+                    @Html.DisplayFor(modelItem => item.MovDate)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MovType)
+                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Almacen.AlmName)
                 </td>
@@ -47,6 +60,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cajas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MovQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MovUnitPrice)
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.MovimientoId">Edit</a> |

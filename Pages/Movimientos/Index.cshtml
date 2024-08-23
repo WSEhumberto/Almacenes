@@ -22,45 +22,80 @@
                 @Html.DisplayNameFor(model => model.Movimiento[0].MovDate)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Movimiento[0].MovType)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Movimiento[0].Almacen)
             </th>
-            <th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Movimiento[0].Material)
+            </th> *@
+            <th style="text-align: right">
                 @Html.DisplayNameFor(model => model.Movimiento[0].MovQuantity)
             </th>
-            <th>
+            <th style="text-align: center">
                 @Html.DisplayNameFor(model => model.Movimiento[0].MovUnitPrice)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Movimiento.OrderByDescending(t => t.MovimientoId)) 
+        @foreach (var item in Model.Movimiento.GroupBy(g => g.Material.MatName).ToList()) 
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovimientoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material.MatName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Almacen.AlmName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovUnitPrice)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.MovimientoId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.MovimientoId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.MovimientoId">Delete</a>
-            </td>
-        </tr>
-}
+            <tr>
+                <td style="text-bold">
+                    @Html.DisplayFor(modelItem => item.Key)
+
+                </td>
+            </tr>
+
+            foreach (var i in item.OrderBy(o => o.MovDate).ThenBy(t => t.MovAlmId))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.MovimientoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.MovDate)
+                        </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.MovType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Almacen.AlmName)
+                    </td>
+                    @* <td>
+                        @Html.DisplayFor(modelItem => i.Material.MatName)
+                    </td> *@
+                    <td style="text-align: right">
+                        @Html.DisplayFor(modelItem => i.MovQuantity)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => i.MovUnitPrice)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@i.MovimientoId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@i.MovimientoId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@i.MovimientoId">Delete</a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td style="text-align: right; font-weight: bold" colspan="5">
+                    Total  @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.Material.MatName).FirstOrDefault() is @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.MovQuantity).Sum()
+                </td>
+                <td colspan="3"></td>
+            </tr>
+
+
+        }
     </tbody>
+    <tfoot>
+        <tr>
+            <td style="text-align: right; font-weight: bold" colspan="5">
+                Total Materials @Model.Movimiento.Select(s => s.MovQuantity).Sum()
+            </td>
+            <td colspan="3"></td>
+        </tr>
+    </tfoot>
 </table>

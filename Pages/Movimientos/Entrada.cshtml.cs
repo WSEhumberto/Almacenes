@@ -40,17 +40,19 @@ namespace Almacenes.Pages.Movimientos
         {
             AlmacenesList =
                 _context.Almacenes
-                    .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.AlmName }).ToList();
+                    .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.AlmName })
+                    .ToList();
             SelectedAlmacen = AlmacenesList.First().Value.ToString();
                 
             MaterialesList =
                 _context.Materiales
-                    .Select(s => new SelectListItem { Value = s.MaterialId.ToString(), Text = s.MatName }).ToList();
+                    .Select(s => new SelectListItem { Value = s.MaterialId.ToString(), Text = s.MatName })
+                    .ToList();
             SelectedMaterial = MaterialesList.First().Value.ToString();
 
             ViewData["Availability1"] = ViewData["Availability"];
 
-            Availability = _balance.Balance(int.Parse(SelectedMaterial), int.Parse(SelectedAlmacen));
+            Availability = _balance.Balance(_context, int.Parse(SelectedMaterial), int.Parse(SelectedAlmacen));
 
             
 
@@ -79,7 +81,7 @@ namespace Almacenes.Pages.Movimientos
 
 
             var Availability =
-                _balance.Balance(Movimiento.MovMatId, Movimiento.MovAlmId);
+                _balance.Balance(_context, Movimiento.MovMatId, Movimiento.MovAlmId);
 
             var mov =
                 _context.Movimientos

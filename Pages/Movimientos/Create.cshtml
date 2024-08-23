@@ -1,5 +1,8 @@
 ﻿@page
 @model  Movimientos.CreateModel
+@using static global::Almacenes.Models.Movimiento
+
+
 
 @{
     ViewData["Title"] = "Create";
@@ -10,33 +13,80 @@
 <h4>Movimiento</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form method="post">
+    <div class="col-md-12">
+        <form method="post" class="row g-3" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <input type="hidden" asp-for="Movimiento.Almacen" value="null" />
+            <input type="hidden" asp-for="Movimiento.Material" value="null" />
+
+            <div class="form-group col-md-2">
                 <label asp-for="Movimiento.MovDate" class="control-label"></label>
-                <input asp-for="Movimiento.MovDate" class="form-control" />
+                <input type="date" asp-for="Movimiento.MovDate" class="form-control" />
                 <span asp-validation-for="Movimiento.MovDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-2">
                 <label asp-for="Movimiento.MovAlmId" class="control-label"></label>
-                <select asp-for="Movimiento.MovAlmId" class ="form-control" asp-items="ViewBag.MovAlmId"></select>
+                <select asp-for="Movimiento.MovAlmId" class="form-control" asp-items="@Model.AlmacenesList">
+                    <option value="">-- Select Almacen --</option>
+                </select>
+                <span asp-validation-for="Movimiento.MovAlmId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+
+            <div class="form-group col-md-8" >
+                <label asp-for="Movimiento.MovType" class="control-label"></label>
+                @* <input asp-for="Movimiento.MovType" class="form-control" /> *@
+                <select asp-for="Movimiento.MovType" class="form-control">
+                    <option selected="selected" value="1">Entrada</option>
+                    <option selected="selected" value="2">Salida</option>
+                </select>
+                <span asp-validation-for="Movimiento.MovType" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group col-md-10">
                 <label asp-for="Movimiento.MovMatId" class="control-label"></label>
-                <select asp-for="Movimiento.MovMatId" class ="form-control" asp-items="ViewBag.MovMatId"></select>
+                <select asp-for="Movimiento.MovMatId" class="form-control" asp-items="@Model.MaterialesList">
+                    <option value="">-- Select Material --</option>
+                </select>
+                <span asp-validation-for="Movimiento.MovMatId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-1">
                 <label asp-for="Movimiento.MovQuantity" class="control-label"></label>
                 <input asp-for="Movimiento.MovQuantity" class="form-control" />
                 <span asp-validation-for="Movimiento.MovQuantity" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-1">
                 <label asp-for="Movimiento.MovUnitPrice" class="control-label"></label>
                 <input asp-for="Movimiento.MovUnitPrice" class="form-control" />
                 <span asp-validation-for="Movimiento.MovUnitPrice" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-4">
+                <label asp-for="Movimiento.Estantes" class="control-label"></label>
+                <select asp-for="Movimiento.Estantes" class="form-control" asp-items="Html.GetEnumSelectList<EstantesEnum>()">
+                    <option value="">-- Selecciona Estante --</option>
+                </select>
+                <span asp-validation-for="Movimiento.Estantes" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label asp-for="Movimiento.Niveles" class="control-label"></label>
+                <select asp-for="Movimiento.Niveles" class="form-control" asp-items="Html.GetEnumSelectList<NivelesEnum>()">
+                    <option value="">-- Selecciona Nivel --</option>
+                </select>
+                <span asp-validation-for="Movimiento.Niveles" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label asp-for="Movimiento.Cajas" class="control-label"></label>
+                <select asp-for="Movimiento.Cajas" class="form-control" asp-items="Html.GetEnumSelectList<BoxEnum>()">
+                    <option value="">-- Selecciona Caja --</option>
+                </select>
+                <span asp-validation-for="Movimiento.Cajas" class="text-danger"></span>
+            </div>
+
+            <div class="form-group ">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -50,3 +100,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
