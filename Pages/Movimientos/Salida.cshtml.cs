@@ -34,6 +34,8 @@ namespace Almacenes.Pages.Movimientos
         public string SelectedMaterial { get; set; }
 
         public decimal Availability { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public IList<Movimiento> MaterialExistence { get; set; } 
 
 
         public IActionResult OnGet()
@@ -52,8 +54,21 @@ namespace Almacenes.Pages.Movimientos
 
             Availability = _balance.Balance(_context, int.Parse(SelectedMaterial), int.Parse(SelectedAlmacen));
 
-            
-
+            MaterialExistence =
+                _context.Movimientos
+                    .Include(m => m.Material)
+                    .Include(a => a.Almacen)
+                    .GroupBy(g => new { g.MovAlmId, g.MovMatId, g.Estantes, g.Niveles, g.Cajas })
+                    .Select(g => new Movimiento
+                    {
+                        MovAlmId = g.Key.MovAlmId,
+                        MovMatId = g.Key.MovMatId,
+                        Estantes = g.Key.Estantes,
+                        Niveles = g.Key.Niveles,
+                        Cajas = g.Key.Cajas,
+                        MovQuantity = g.Sum(s => s.MovQuantity)
+                    })
+                    .ToList();
             return Page();
         }
 

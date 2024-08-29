@@ -11,7 +11,106 @@
 <h4>@ViewData["Availability"]</h4>
 <h4>@ViewData["Availability1"]</h4>
 <hr />
-<form class="row g-3" method="post">
+
+@foreach(var g in Model.MaterialExistence)
+{
+    <div>@($"Almacen: {g.MovAlmId}, Material: {g.MovMatId}, Estante: {g.Estantes}, Nivel: {g.Niveles}, Caja: {g.Cajas}, Existencia: {g.MovQuantity}")</div>
+}
+
+<table>
+    <tr>
+        <td></td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialExistence[0].MovAlmId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialExistence[0].Estantes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialExistence[0].Niveles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialExistence[0].Cajas)
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.MaterialExistence[0].MovAlmId)
+            </th> *@
+            <th style="text-align: right">
+                @Html.DisplayNameFor(model => model.MaterialExistence[0].MovQuantity)
+            </th>
+            @* <th style="text-align: center">
+                @Html.DisplayNameFor(model => model.Movimiento[0].MovUnitPrice)
+            </th> *@
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MaterialExistence.GroupBy(g => g.MovMatId).ToList())
+        {
+            <tr>
+                <td style="text-bold">
+                    @Html.DisplayFor(modelItem => item.Key)
+
+                </td>
+            </tr>
+
+            foreach (var i in item.OrderBy(o => o.MovAlmId))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.MovAlmId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Estantes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Niveles)
+                    </td>
+                    @* <td>
+                        @Html.DisplayFor(modelItem => i.Almacen.AlmName)
+                    </td> *@
+                    @* <td>
+            @Html.DisplayFor(modelItem => i.Material.MatName)
+            </td> *@
+                    <td style="text-align: right">
+                        @Html.DisplayFor(modelItem => i.Cajas)
+                    </td>
+                    <td style="text-align: center">
+                        @Html.DisplayFor(modelItem => i.MovQuantity)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@i.MovimientoId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@i.MovimientoId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@i.MovimientoId">Delete</a>
+                    </td>
+                </tr>
+            }
+            @* <tr>
+                <td style="text-align: right; font-weight: bold" colspan="5">
+                    Total  @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.Material.MatName).FirstOrDefault() is @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.MovQuantity).Sum()
+                </td>
+                <td colspan="3"></td>
+            </tr> *@
+
+
+        }
+    </tbody>
+    @* <tfoot>
+        <tr>
+            <td style="text-align: right; font-weight: bold" colspan="5">
+                Total Materials @Model.Movimiento.Select(s => s.MovQuantity).Sum()
+            </td>
+            <td colspan="3"></td>
+        </tr>
+    </tfoot> *@
+</table>
+@* <form class="row g-3" method="post">
     <input type="hidden" asp-for="Movimiento.Almacen" value="null" />
     <input type="hidden" asp-for="Movimiento.Material" value="null" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -69,7 +168,7 @@
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
-</form>
+</form> *@
 
 <div>
     <a asp-page="Index">Back to List</a>

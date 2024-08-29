@@ -19,11 +19,11 @@ namespace Almacenes.Pages.Movimientos
             _context = context;
         }
 
-        public IList<Movimiento> Movimiento { get;set; } = default!;
+        public IList<Movimiento> Movimientos { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Movimiento = await _context.Movimientos
+            Movimientos = await _context.Movimientos
                 .Include(m => m.Almacen)
                 .Include(m => m.Material)
                 .OrderBy(m => m.MovMatId).ThenBy(m => m.MovAlmId)

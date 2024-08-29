@@ -16,31 +16,37 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Movimiento[0].MovimientoId)
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovimientoId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movimiento[0].MovDate)
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movimiento[0].MovType)
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movimiento[0].Almacen)
+                @Html.DisplayNameFor(model => model.Movimientos[0].Almacen)
             </th>
-            @* <th>
-                @Html.DisplayNameFor(model => model.Movimiento[0].Material)
-            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Movimientos[0].Estantes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimientos[0].Niveles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimientos[0].Cajas)
+            </th>
             <th style="text-align: right">
-                @Html.DisplayNameFor(model => model.Movimiento[0].MovQuantity)
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovQuantity)
             </th>
             <th style="text-align: center">
-                @Html.DisplayNameFor(model => model.Movimiento[0].MovUnitPrice)
+                @Html.DisplayNameFor(model => model.Movimientos[0].MovUnitPrice)
             </th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Movimiento.GroupBy(g => g.Material.MatName).ToList()) 
+        @foreach (var item in Model.Movimientos.GroupBy(g => g.Material.MatName).ToList()) 
         {
             <tr>
                 <td style="text-bold">
@@ -62,11 +68,17 @@
                         @Html.DisplayFor(modelItem => i.MovType)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => i.Almacen.AlmName)
+                        @Html.DisplayFor(modelItem => i.MovAlmId)
                     </td>
-                    @* <td>
-                        @Html.DisplayFor(modelItem => i.Material.MatName)
-                    </td> *@
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Estantes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Niveles)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => i.Cajas)
+                    </td>
                     <td style="text-align: right">
                         @Html.DisplayFor(modelItem => i.MovQuantity)
                     </td>
@@ -82,7 +94,7 @@
             }
             <tr>
                 <td style="text-align: right; font-weight: bold" colspan="5">
-                    Total  @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.Material.MatName).FirstOrDefault() is @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.MovQuantity).Sum()
+                    Total  @Model.Movimientos.Where(w => w.Material.MatName == item.Key).Select(s => s.Material.MatName).FirstOrDefault() is @Model.Movimientos.Where(w => w.Material.MatName == item.Key).Select(s => s.MovQuantity).Sum()
                 </td>
                 <td colspan="3"></td>
             </tr>
@@ -93,7 +105,7 @@
     <tfoot>
         <tr>
             <td style="text-align: right; font-weight: bold" colspan="5">
-                Total Materials @Model.Movimiento.Select(s => s.MovQuantity).Sum()
+                Total Materials @Model.Movimientos.Select(s => s.MovQuantity).Sum()
             </td>
             <td colspan="3"></td>
         </tr>
