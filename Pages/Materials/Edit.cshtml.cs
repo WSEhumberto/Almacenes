@@ -22,6 +22,7 @@ namespace Almacenes.Pages.Materials
 
         [BindProperty]
         public Material Material { get; set; } = default!;
+        //public Movimiento Movimientos { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -24,7 +24,7 @@ namespace Almacenes.Pages.Materials
             return Page();
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public Material Material { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -34,7 +34,7 @@ namespace Almacenes.Pages.Materials
             {
                 return Page();
             }
-
+            _context.Materiales.Add(Material);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

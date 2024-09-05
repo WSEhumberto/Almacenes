@@ -12,17 +12,12 @@
 <h4>@ViewData["Availability1"]</h4>
 <hr />
 
-@foreach(var g in Model.MaterialExistence)
+@* @foreach(var g in Model.MaterialExistence.OrderBy(o => o.MovMatId).ThenBy(t => t.MovAlmId))
 {
     <div>@($"Almacen: {g.MovAlmId}, Material: {g.MovMatId}, Estante: {g.Estantes}, Nivel: {g.Niveles}, Caja: {g.Cajas}, Existencia: {g.MovQuantity}")</div>
-}
+} *@
 
-<table>
-    <tr>
-        <td></td>
-    </tr>
-</table>
-
+<form>
 <table class="table">
     <thead>
         <tr>
@@ -38,15 +33,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.MaterialExistence[0].Cajas)
             </th>
-            @* <th>
-            @Html.DisplayNameFor(model => model.MaterialExistence[0].MovAlmId)
-            </th> *@
             <th style="text-align: right">
                 @Html.DisplayNameFor(model => model.MaterialExistence[0].MovQuantity)
             </th>
-            @* <th style="text-align: center">
-                @Html.DisplayNameFor(model => model.Movimiento[0].MovUnitPrice)
-            </th> *@
+            <th style="text-align: right">
+                Salida
+            </th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -59,7 +51,6 @@
 
                 </td>
             </tr>
-
             foreach (var i in item.OrderBy(o => o.MovAlmId))
             {
                 <tr>
@@ -72,17 +63,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => i.Niveles)
                     </td>
-                    @* <td>
-                        @Html.DisplayFor(modelItem => i.Almacen.AlmName)
-                    </td> *@
-                    @* <td>
-            @Html.DisplayFor(modelItem => i.Material.MatName)
-            </td> *@
-                    <td style="text-align: right">
+                    <td>
                         @Html.DisplayFor(modelItem => i.Cajas)
                     </td>
-                    <td style="text-align: center">
+                    <td style="text-align: right">
                         @Html.DisplayFor(modelItem => i.MovQuantity)
+                    </td>
+                    <td style="text-align: right">
+                        <input type="number" />
                     </td>
                     <td>
                         <a asp-page="./Edit" asp-route-id="@i.MovimientoId">Edit</a> |
@@ -91,12 +79,12 @@
                     </td>
                 </tr>
             }
-            @* <tr>
+            <tr>
                 <td style="text-align: right; font-weight: bold" colspan="5">
-                    Total  @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.Material.MatName).FirstOrDefault() is @Model.Movimiento.Where(w => w.Material.MatName == item.Key).Select(s => s.MovQuantity).Sum()
+                    Total  @Model.MaterialExistence.Where(w => w.MovMatId == item.Key).Select(s => s.MovQuantity).Sum()
                 </td>
                 <td colspan="3"></td>
-            </tr> *@
+            </tr>
 
 
         }
@@ -110,6 +98,7 @@
         </tr>
     </tfoot> *@
 </table>
+</form>
 @* <form class="row g-3" method="post">
     <input type="hidden" asp-for="Movimiento.Almacen" value="null" />
     <input type="hidden" asp-for="Movimiento.Material" value="null" />

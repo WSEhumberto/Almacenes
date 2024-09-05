@@ -38,6 +38,13 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.MatUM)
                     </td>
+                    <td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.MaterialId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.MaterialId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.MaterialId">Delete</a>
+                </td>
+                    </td>
                 </tr>
             }
     </tbody>
