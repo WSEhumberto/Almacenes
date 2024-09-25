@@ -101,6 +101,11 @@ namespace Almacenes.Pages.Movimientos
 
             //Movimiento.MovQuantity = -Movimiento.MovQuantity;
 
+            //Movimiento.MovTypeEnum movTypeEnum = new Movimiento.MovTypeEnum();
+            //movTypeEnum = Movimiento.MovTypeEnum.Entrada;
+
+            Movimiento.MovType = Movimiento.MovTypeEnum.Entrada;    
+
             _context.Movimientos.Add(Movimiento);
             await _context.SaveChangesAsync();
 

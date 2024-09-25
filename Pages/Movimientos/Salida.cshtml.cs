@@ -113,6 +113,7 @@ namespace Almacenes.Pages.Movimientos
             }
 
             Movimiento.MovQuantity = -Movimiento.MovQuantity;
+            Movimiento.MovType = Movimiento.MovTypeEnum.Salida;
 
             _context.Movimientos.Add(Movimiento);
             await _context.SaveChangesAsync();
