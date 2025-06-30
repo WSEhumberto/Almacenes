@@ -9,8 +9,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AlmacenesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AlmacenesContext") ?? throw new InvalidOperationException("Connection string 'AlmacenesContext' not found.")));
 
-builder.Services.AddDbContext<AlmacenesContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING") ?? throw new InvalidOperationException("Connection string '\"AZURE_SQL_CONNECTIONSTRING\"' not found.")));
+//builder.Services.AddDbContext<AlmacenesContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING") ?? throw new InvalidOperationException("Connection string '\"AZURE_SQL_CONNECTIONSTRING\"' not found.")));
 
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -30,16 +30,18 @@ else
 {
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+
+        var context = services.GetRequiredService<AlmacenesContext>();
+        context.Database.EnsureCreated();
+        DbInitializer.Initialize(context);
+    }
 }
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<AlmacenesContext>();
-    context.Database.EnsureCreated();
-    DbInitializer.Initialize(context);
-}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

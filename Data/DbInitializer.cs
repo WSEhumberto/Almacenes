@@ -24,8 +24,8 @@ namespace Almacenes.Data
 
             var materiales = new Material[]
             {
-                new Material{MatName = "PVC Bushing 3/4", MatUM = "ea" },
-                new Material{MatName = "PVC Bushing 1", MatUM = "ea" }
+                new Material{MatCode = "PVCb0.75", MatName = "PVC Bushing 3/4", MatUM = "ea" },
+                new Material{MatCode = "PVCb1",  MatName = "PVC Bushing 1", MatUM = "ea" }
             };
 
             context.Materiales.AddRange(materiales);

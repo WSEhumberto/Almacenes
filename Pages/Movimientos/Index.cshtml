@@ -93,7 +93,7 @@
                 </tr>
             }
             <tr>
-                <td style="text-align: right; font-weight: bold" colspan="5">
+                <td style="text-align: right; font-weight: bold" colspan="8">
                     Total  @Model.Movimientos.Where(w => w.Material.MatName == item.Key).Select(s => s.Material.MatName).FirstOrDefault() is @Model.Movimientos.Where(w => w.Material.MatName == item.Key).Select(s => s.MovQuantity).Sum()
                 </td>
                 <td colspan="3"></td>
@@ -104,7 +104,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td style="text-align: right; font-weight: bold" colspan="5">
+            <td style="text-align: right; font-weight: bold" colspan="8">
                 Total Materials @Model.Movimientos.Select(s => s.MovQuantity).Sum()
             </td>
             <td colspan="3"></td>

@@ -13,8 +13,9 @@ namespace Almacenes.Models
     public class Material 
     {
         public int MaterialId { get; set; }
-        public string MatName { get; set; }
-        public string MatUM { get; set; }
+        public required string MatCode { get; set; } 
+        public required string MatName { get; set; }
+        public required string MatUM { get; set; }
         public List<Movimiento> Movimientos { get; set; } /*= new List<Movimiento>();*/
 
 

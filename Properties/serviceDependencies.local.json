@@ -6,6 +6,14 @@
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:AlmacenesContext",
       "dynamicId": null
+    },
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ServiceLinker/locations/canadacentral/connectors/ConnectionStringsAZURE_SQL_CONNECTIONSTR_22CF30F1E5",
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/almacenesdbserver/databases/Almacenes_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:AZURE_SQL_CONNECTIONSTRING",
+      "dynamicId": null
     }
   }
 }

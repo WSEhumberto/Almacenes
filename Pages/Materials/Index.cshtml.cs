@@ -30,19 +30,21 @@ namespace Almacenes.Pages.Materials
         public IList<MaterialMovimientosVM> MaterialMovimientosVMs { get;set; } = default!;
         public async Task OnGetAsync()
         {
-            var materials = from r in _context.Materiales.Include(m => m.Movimientos)
+            var materials = from r in _context.Materiales
+                                //.Include(m => m.Movimientos)
                                 //join s in _context.Movimientos on r.MaterialId equals s.MovMatId
                                 //group s by s.MovAlmId into g
-                                //select r;
+                            select r;
 
-                            select new Material
-                            {
-                                MaterialId = r.MaterialId,
-                                MatName = r.MatName,
-                                MatUM = r.MatUM,
-                                Existencia = _balance.Balance(_context, r.MaterialId)
-                                //Movimientos = r.Movimientos
-                            };
+            //select new Material
+            //                {
+            //                    MaterialId = r.MaterialId,
+            //                    MatCode = r.MatCode,
+            //                    MatName = r.MatName,
+            //                    MatUM = r.MatUM,
+            //                    Existencia = _balance.Balance(_context, r.MaterialId)
+            //                    //Movimientos = r.Movimientos
+            //                };
 
             Material = await materials.ToListAsync();
 
